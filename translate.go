@@ -533,6 +533,7 @@ func Count(str, pattern string) int {
 
 // Squeeze deletes adjacent repeated runes in str.
 // If pattern is not empty, only runes matching the pattern will be squeezed.
+// Retained runes preserve their original bytes.
 //
 // Samples:
 //
@@ -569,11 +570,11 @@ func Squeeze(str, pattern string) string {
 			}
 
 			if skipSqueeze {
-				output.WriteRune(r)
+				output.WriteString(str[:size])
 			}
 		} else {
 			if output != nil {
-				output.WriteRune(r)
+				output.WriteString(str[:size])
 			}
 
 			last = r
